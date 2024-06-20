@@ -1,64 +1,51 @@
-/*const slides = [
-	{
-		"image": "slide1.jpg",
-		"tagLine": "Impressions tous formats <span>en boutique et en ligne</span>"
-	},
-	{
-		"image": "slide2.jpg",
-		"tagLine": "Tirages haute définition grand format <span>pour vos bureaux et events</span>"
-	},
-	{
-		"image": "slide3.jpg",
-		"tagLine": "Grand choix de couleurs <span>de CMJN aux pantones</span>"
-	},
-	{
-		"image": "slide4.png",
-		"tagLine": "Autocollants <span>avec découpe laser sur mesure</span>"
-	}
-]
-*/
-
-let $img = document.getElementsByClassName("banner-img")
-
-let $next = document.getElementsByClassName("arrow_left")
-let $prev = document.getElementsByClassName("arrow_right")
-
-let monTableau = [
-	"./images/slideshowslide1.jpg",
-	"./images/slideshowslide2.jpg",
-	"./images/slideshowslide3.jpg",
-	"./images/slideshowslide4.jpg"
+const slides = [
+    {
+        "image": "slide1.jpg",
+        "tagLine": "Impressions tous formats <span>en boutique et en ligne</span>"
+    },
+    {
+        "image": "slide2.jpg",
+        "tagLine": "Tirages haute définition grand format <span>pour vos bureaux et events</span>"
+    },
+    {
+        "image": "slide3.jpg",
+        "tagLine": "Grand choix de couleurs <span>de CMJN aux pantones</span>"
+    },
+    {
+        "image": "slide4.png",
+        "tagLine": "Autocollants <span>avec découpe laser sur mesure</span>"
+    }
 ]
 
-let index = 0
+let $img = document.getElementsByClassName("banner-img")[0];
+let $next = document.getElementsByClassName("arrow_right")[0];
+let $prev = document.getElementsByClassName("arrow_left")[0];
+let $tagLine = document.querySelector("#banner p"); // Assuming there is a p element inside a banner with id="banner"
 
-console.log(monTableau.length)
+let index = 0;
 
-let max = monTableau.length - 1
-let min = 0
+function updateSlide(index) {
+    $img.setAttribute("src", "./assets/images/slideshow/" + slides[index].image);
+    $tagLine.innerHTML = slides[index].tagLine;
+}
 
-
-$img.setAttribute("src", monTableau[index])
-$p.innerHTML = index
+// Initial slide update
+updateSlide(index);
 
 $prev.addEventListener("click", function () {
-	if (index === min) {
-		index = max
-	}
-	else {
-		index = index - 1
-	}
-	$img.setAttribute("src", monTableau[index])
-	$p.innerHTML = index
-})
+    if (index === 0) {
+        index = slides.length - 1;
+    } else {
+        index -= 1;
+    }
+    updateSlide(index);
+});
 
 $next.addEventListener("click", function () {
-	if (index === max) {
-		index = min
-	}
-	else {
-		index = index + 1
-	}
-	$img.setAttribute("src", monTableau[index])
-	$p.innerHTML = index
-})
+    if (index === slides.length - 1) {
+        index = 0;
+    } else {
+        index += 1;
+    }
+    updateSlide(index);
+});

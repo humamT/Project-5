@@ -222,8 +222,9 @@ header {
 /* Gestion des fleches du carrousel */
 #banner .arrow {
 	position: absolute;
+	cursor: pointer;
 	background: none;
-    border: none;
+	border: none;
 }
 
 #banner .arrow_left {
